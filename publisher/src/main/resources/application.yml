@@ -1,0 +1,7 @@
+spring:
+  rabbitmq:
+    host: 10.211.55.10 # 主机名
+    port: 5672 # 端口
+    virtual-host: / # 虚拟主机
+    username: guest # 用户名
+    password: guest # 密码
