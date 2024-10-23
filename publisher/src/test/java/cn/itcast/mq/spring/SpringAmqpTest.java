@@ -47,7 +47,7 @@ public class SpringAmqpTest {
      */
     @Test
     public void testFanoutQueue() throws InterruptedException {
-        String exchangeName = "wangxg.fanoutExchange";
+        String exchangeName = "hmall.fanout";
         String msg = "hello all ";
         rabbitTemplate.convertAndSend(exchangeName,"", msg);
     }
@@ -59,11 +59,12 @@ public class SpringAmqpTest {
     @Test
     public void testDirectQueue() throws InterruptedException {
         // 队列名称
-        String exchangeName = "wangxg.directExchange";
+        String exchangeName = "hmall.direct";
+        String routingKey = "red";
         // 消息
-        String msg = "红色 ";
+        String msg = "hello 大家好: " + routingKey;
         // 发送消息，参数依次为：交换机名称，RoutingKey，消息
-        rabbitTemplate.convertAndSend(exchangeName,"blue", msg);
+        rabbitTemplate.convertAndSend(exchangeName,"red", msg);
     }
 
     /**
@@ -73,11 +74,11 @@ public class SpringAmqpTest {
     @Test
     public void testTopicQueue() throws InterruptedException {
         // 队列名称
-        String exchangeName = "wangxg.topicExchange";
+        String exchangeName = "hmall.topic";
         // 消息
         String msg = "11111";
         // 发送消息，参数依次为：交换机名称，RoutingKey，消息
-        rabbitTemplate.convertAndSend(exchangeName,"china.news", msg);
+        rabbitTemplate.convertAndSend(exchangeName,"china.aaa", msg);
     }
 
     @Test

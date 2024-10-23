@@ -44,14 +44,33 @@ public class SpringRabbitListener {
         Thread.sleep(500);
     }
 
-//    @RabbitListener(queues = "fanout.queue1")
-//    public void listenerFanoutQueue1(String msg){
-//        System.out.println("消费者1接收到Fanout消息：【" + msg + "】");
-//    }
-//    @RabbitListener(queues = "fanout.queue2")
-//    public void listenerFanoutQueue2(String msg){
-//        System.out.println("消费者2接收到Fanout消息：【" + msg + "】");
-//    }
+    @RabbitListener(queues = "fanout.queue1")
+    public void listenerFanoutQueue1(String msg){
+        System.out.println("消费者1接收到Fanout消息：【" + msg + "】");
+    }
+    @RabbitListener(queues = "fanout.queue2")
+    public void listenerFanoutQueue2(String msg){
+        System.out.println("消费者2接收到Fanout消息：【" + msg + "】");
+    }
+
+    @RabbitListener(queues = "direct.queue1")
+    public void listenerDirectQueue1(String msg){
+        System.out.println("消费者1接收到direct消息：【" + msg + "】");
+    }
+    @RabbitListener(queues = "direct.queue2")
+    public void listenerDirectQueue2(String msg){
+        System.out.println("消费者2接收到direct消息：【" + msg + "】");
+    }
+
+    @RabbitListener(queues = "topic.queue1")
+    public void listenerTopicQueue1(String msg){
+        System.out.println("消费者1接收到topic.queue1消息：【" + msg + "】");
+    }
+    @RabbitListener(queues = "topic.queue2")
+    public void listenerTopicQueue2(String msg){
+        System.out.println("消费者2接收topic.queue2消息：【" + msg + "】");
+    }
+
 //
 //    /*----------------------------------------------------------------------------------------*/
 //
