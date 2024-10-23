@@ -17,32 +17,32 @@ public class SpringRabbitListener {
      * @param msg
      * @throws Exception
      */
-    @RabbitListener(queues = "simple.queue")
-    public void listenerSimpleQueueMessage(String msg) throws Exception{
-        System.out.println("spring 消费者接收到消息 ：【" + msg + "】");
-    }
+//    @RabbitListener(queues = "simple.queue")
+//    public void listenerSimpleQueueMessage(String msg) throws Exception{
+//        System.out.println("spring 消费者接收到消息 ：【" + msg + "】");
+//    }
     /*----------------------------------------------------------------------------------------*/
     /**
      * 工作队列（消费者）
      * @param msg
      * @throws Exception
      */
-    @RabbitListener(queues = "work.queue")
-    public void listenerWorkQueueMessage1(String msg) throws Exception{
-        System.out.println("spring 消费者1接收到消息 ：【" + msg + "】");
-        Thread.sleep(20);
-    }
-
-    /**
-     * 工作队列（消费者）
-     * @param msg
-     * @throws Exception
-     */
-    @RabbitListener(queues = "work.queue")
-    public void listenerWorkQueueMessage2(String msg) throws Exception{
-        System.err.println("spring 消费者2接收到消息 ：【" + msg + "】");
-        Thread.sleep(500);
-    }
+//    @RabbitListener(queues = "work.queue")
+//    public void listenerWorkQueueMessage1(String msg) throws Exception{
+//        System.out.println("spring 消费者1接收到消息 ：【" + msg + "】");
+//        Thread.sleep(20);
+//    }
+//
+//    /**
+//     * 工作队列（消费者）
+//     * @param msg
+//     * @throws Exception
+//     */
+//    @RabbitListener(queues = "work.queue")
+//    public void listenerWorkQueueMessage2(String msg) throws Exception{
+//        System.err.println("spring 消费者2接收到消息 ：【" + msg + "】");
+//        Thread.sleep(500);
+//    }
 
     @RabbitListener(queues = "fanout.queue1")
     public void listenerFanoutQueue1(String msg){
@@ -61,15 +61,15 @@ public class SpringRabbitListener {
     public void listenerDirectQueue2(String msg){
         System.out.println("消费者2接收到direct消息：【" + msg + "】");
     }
-
-    @RabbitListener(queues = "topic.queue1")
-    public void listenerTopicQueue1(String msg){
-        System.out.println("消费者1接收到topic.queue1消息：【" + msg + "】");
-    }
-    @RabbitListener(queues = "topic.queue2")
-    public void listenerTopicQueue2(String msg){
-        System.out.println("消费者2接收topic.queue2消息：【" + msg + "】");
-    }
+//
+//    @RabbitListener(queues = "topic.queue1")
+//    public void listenerTopicQueue1(String msg){
+//        System.out.println("消费者1接收到topic.queue1消息：【" + msg + "】");
+//    }
+//    @RabbitListener(queues = "topic.queue2")
+//    public void listenerTopicQueue2(String msg){
+//        System.out.println("消费者2接收topic.queue2消息：【" + msg + "】");
+//    }
 
 //
 //    /*----------------------------------------------------------------------------------------*/
