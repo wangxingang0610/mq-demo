@@ -85,8 +85,8 @@ public class SpringAmqpTest {
     public void testSendMap() throws InterruptedException {
         // 准备消息
         Map<String,Object> msg = new HashMap<>();
-        msg.put("name", "Jack");
-        msg.put("age", 21);
+        msg.put("name", "Rose");
+        msg.put("age", 29);
         // 发送消息
         rabbitTemplate.convertAndSend("object.queue", msg);
     }

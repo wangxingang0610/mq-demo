@@ -113,7 +113,7 @@ public class SpringRabbitListener {
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(name = "topic.queue2"),
-            exchange = @Exchange(name = "hmall.topice", type = ExchangeTypes.TOPIC),
+            exchange = @Exchange(name = "hmall.topic", type = ExchangeTypes.TOPIC),
             key = "#.news"
     ))
     public void listenerTopicQueue2(String msg){
