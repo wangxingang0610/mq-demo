@@ -27,17 +27,17 @@ public class SpringAmqpTest {
     }
 
     /**
-     * 工作队列
-     * @throws InterruptedException
+     * workQueue
+     * 向队列中不停发送消息，模拟消息堆积。
      */
     @Test
     public void testWorkQueue() throws InterruptedException {
-        String queueName = "simple.queue";
+        String queueName = "work.queue";
         String msg = "hello msg ";
 
         for (int i = 1; i <= 50; i++) {
             rabbitTemplate.convertAndSend(queueName, msg + i);
-            Thread.sleep(20);
+             Thread.sleep(20);
         }
     }
 
