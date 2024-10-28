@@ -12,21 +12,21 @@ import java.util.Map;
 @Component
 public class SpringRabbitListener {
 
-    /**
-     * 1. 简单队列（消费者）
-     * @param msg
-     * @throws Exception
-     */
+//    /**
+//     * 1. 简单队列（消费者）
+//     * @param msg
+//     * @throws Exception
+//     */
 //    @RabbitListener(queues = "simple.queue")
 //    public void listenerSimpleQueueMessage(String msg) throws Exception{
 //        System.out.println("spring 消费者接收到消息 ：【" + msg + "】");
 //    }
-    /*----------------------------------------------------------------------------------------*/
-    /**
-     * 工作队列（消费者）
-     * @param msg
-     * @throws Exception
-     */
+//    /*----------------------------------------------------------------------------------------*/
+//    /**
+//     * 工作队列（消费者）
+//     * @param msg
+//     * @throws Exception
+//     */
 //    @RabbitListener(queues = "work.queue")
 //    public void listenerWorkQueueMessage1(String msg) throws Exception{
 //        System.out.println("spring 消费者1接收到消息 ：【" + msg + "】");
@@ -43,7 +43,7 @@ public class SpringRabbitListener {
 //        System.err.println("spring 消费者2接收到消息 ：【" + msg + "】");
 //        Thread.sleep(500);
 //    }
-
+//
 //    @RabbitListener(queues = "fanout.queue1")
 //    public void listenerFanoutQueue1(String msg){
 //        System.out.println("消费者1接收到Fanout消息：【" + msg + "】");
@@ -52,7 +52,7 @@ public class SpringRabbitListener {
 //    public void listenerFanoutQueue2(String msg){
 //        System.out.println("消费者2接收到Fanout消息：【" + msg + "】");
 //    }
-
+//
 //    @RabbitListener(queues = "direct.queue1")
 //    public void listenerDirectQueue1(String msg){
 //        System.out.println("消费者1接收到direct消息：【" + msg + "】");
@@ -71,6 +71,23 @@ public class SpringRabbitListener {
 //        System.out.println("消费者2接收topic.queue2消息：【" + msg + "】");
 //    }
 
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "fanout.queue1"),
+            exchange = @Exchange(name = "hmall.fanout", type = ExchangeTypes.FANOUT)
+    ))
+    public void listenerDirectQueue1(String msg) {
+        System.out.println("消费者1接收到Direct消息：【" + msg + "】");
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "fanout.queue2"),
+            exchange = @Exchange(name = "hmall.fanout", type = ExchangeTypes.FANOUT)
+    ))
+    public void listenerDirectQueue2(String msg) {
+        System.out.println("消费者2接收到Direct消息：【" + msg + "】");
+    }
+
+
 //
 //    /*----------------------------------------------------------------------------------------*/
 
@@ -78,47 +95,47 @@ public class SpringRabbitListener {
      * 发布订阅 - 路由模式
      * @param msg
      */
-    @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "direct.queue1"),
-            exchange = @Exchange(name = "hmall.direct", type = ExchangeTypes.DIRECT),
-            key = {"red", "blue"}
-    ))
-    public void listenerDirectQueue1(String msg){
-        System.out.println("消费者1接收到Direct消息：【"+msg+"】");
-    }
-
-    @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "direct.queue2"),
-            exchange = @Exchange(name = "hmall.direct", type = ExchangeTypes.DIRECT),
-            key = {"red", "yellow"}
-    ))
-    public void listenerDirectQueue2(String msg){
-        System.out.println("消费者2接收到Direct消息：【"+msg+"】");
-    }
-
-    /*----------------------------------------------------------------------------------------*/
-
-    /**
-     * 发布订阅 - 主体模式
-     * @param msg
-     */
-    @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "topic.queue1"),
-            exchange = @Exchange(name = "hmall.topic", type = ExchangeTypes.TOPIC),
-            key = "china.#"
-    ))
-    public void listenerTopicQueue1(String msg){
-        System.out.println("消费者1接收到Topic消息：【"+msg+"】");
-    }
-
-    @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "topic.queue2"),
-            exchange = @Exchange(name = "hmall.topic", type = ExchangeTypes.TOPIC),
-            key = "#.news"
-    ))
-    public void listenerTopicQueue2(String msg){
-        System.out.println("消费者2接收到Topic消息：【"+msg+"】");
-    }
+//    @RabbitListener(bindings = @QueueBinding(
+//            value = @Queue(name = "direct.queue1"),
+//            exchange = @Exchange(name = "hmall.direct", type = ExchangeTypes.DIRECT),
+//            key = {"red", "blue"}
+//    ))
+//    public void listenerDirectQueue1(String msg){
+//        System.out.println("消费者1接收到Direct消息：【"+msg+"】");
+//    }
+//
+//    @RabbitListener(bindings = @QueueBinding(
+//            value = @Queue(name = "direct.queue2"),
+//            exchange = @Exchange(name = "hmall.direct", type = ExchangeTypes.DIRECT),
+//            key = {"red", "yellow"}
+//    ))
+//    public void listenerDirectQueue2(String msg){
+//        System.out.println("消费者2接收到Direct消息：【"+msg+"】");
+//    }
+//
+//    /*----------------------------------------------------------------------------------------*/
+//
+//    /**
+//     * 发布订阅 - 主体模式
+//     * @param msg
+//     */
+//    @RabbitListener(bindings = @QueueBinding(
+//            value = @Queue(name = "topic.queue1"),
+//            exchange = @Exchange(name = "hmall.topic", type = ExchangeTypes.TOPIC),
+//            key = "china.#"
+//    ))
+//    public void listenerTopicQueue1(String msg){
+//        System.out.println("消费者1接收到Topic消息：【"+msg+"】");
+//    }
+//
+//    @RabbitListener(bindings = @QueueBinding(
+//            value = @Queue(name = "topic.queue2"),
+//            exchange = @Exchange(name = "hmall.topic", type = ExchangeTypes.TOPIC),
+//            key = "#.news"
+//    ))
+//    public void listenerTopicQueue2(String msg){
+//        System.out.println("消费者2接收到Topic消息：【"+msg+"】");
+//    }
 
 
 //    @RabbitListener(queues = "object.queue")

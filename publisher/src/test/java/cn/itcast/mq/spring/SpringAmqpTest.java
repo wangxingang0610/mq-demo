@@ -64,7 +64,7 @@ public class SpringAmqpTest {
         // 消息
         String msg = "hello 大家好: " + routingKey;
         // 发送消息，参数依次为：交换机名称，RoutingKey，消息
-        rabbitTemplate.convertAndSend(exchangeName,"red", msg);
+        rabbitTemplate.convertAndSend(exchangeName,routingKey, msg);
     }
 
     /**
