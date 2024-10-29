@@ -152,11 +152,39 @@ public class SpringRabbitListener {
      * @param msg
      * @throws Exception
      */
-    @RabbitListener(queues = "simple.queue")
-    public void listenerSimpleQueueMessage(Message message) throws Exception{
-        log.info("spring 消费者接收到消息 ：【" + message + "】");
-        String msg = new String(message.getBody());
-        log.info("spring 消费者接收到消息 ：【" + msg + "】");
+//    @RabbitListener(queues = "simple.queue")
+//    public void listenerSimpleQueueMessage(Message message) throws Exception{
+//        log.info("spring 消费者接收到消息 ：【" + message + "】");
+//        String msg = new String(message.getBody());
+//        log.info("spring 消费者接收到消息 ：【" + msg + "】");
+//    }
+
+
+    /**
+     * 死信队列
+     * @param msg
+     */
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "dlx.queue"),
+            exchange = @Exchange(name = "dlx.direct", type = ExchangeTypes.DIRECT),
+            key = {"hi"}
+    ))
+    public void listenerDeadQueue(String msg) {
+        log.info("dlx.queue 接收到消息：【" + msg + "】");
+    }
+
+
+    /**
+     * 延迟队列
+     * @param msg
+     */
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "delay.queue", durable = "true"),
+            exchange = @Exchange(name = "delay.direct", delayed = "true"),
+            key = "delay"
+    ))
+    public void listenDelayMessage(String msg){
+        log.info("接收到delay.queue的延迟消息：{}", msg);
     }
 
 }

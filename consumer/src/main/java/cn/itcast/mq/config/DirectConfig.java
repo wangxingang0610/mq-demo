@@ -95,4 +95,5 @@ public class DirectConfig {
         return new RepublishMessageRecoverer(rabbitTemplate, "error.direct", "error");
     }
 
+
 }
