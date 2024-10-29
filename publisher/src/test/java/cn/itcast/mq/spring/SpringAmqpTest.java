@@ -3,6 +3,9 @@ package cn.itcast.mq.spring;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +122,17 @@ public class SpringAmqpTest {
         rabbitTemplate.convertAndSend("hmall.direct111", "blue11", "hello", cd);
         // 单元测试结束，jvm就退出了，此时没有时间去等待回调函数执行完毕，所以需要等待一段时间
         Thread.sleep(60000);
+    }
+
+    @Test
+    public void testSimpleMessage(){
+//        String queueName = "simple.queue";
+        String queueName = "lazy.queue";
+        Message message = MessageBuilder.withBody("hello world".getBytes()).setDeliveryMode(MessageDeliveryMode.NON_PERSISTENT).build();
+        for (int i = 0; i < 1000000; i++) {
+            rabbitTemplate.convertAndSend(queueName, message);
+        }
+
     }
 
 
