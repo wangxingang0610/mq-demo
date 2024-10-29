@@ -12,15 +12,16 @@ import java.util.Map;
 @Component
 public class SpringRabbitListener {
 
-//    /**
-//     * 1. 简单队列（消费者）
-//     * @param msg
-//     * @throws Exception
-//     */
-//    @RabbitListener(queues = "simple.queue")
-//    public void listenerSimpleQueueMessage(String msg) throws Exception{
-//        System.out.println("spring 消费者接收到消息 ：【" + msg + "】");
-//    }
+    /**
+     * 1. 简单队列（消费者）
+     * @param msg
+     * @throws Exception
+     */
+    @RabbitListener(queues = "simple.queue")
+    public void listenerSimpleQueueMessage(String msg) throws Exception{
+        System.out.println("spring 消费者接收到消息 ：【" + msg + "】");
+        throw new RuntimeException("模拟异常");
+    }
 //    /*----------------------------------------------------------------------------------------*/
 //    /**
 //     * 工作队列（消费者）
@@ -71,21 +72,21 @@ public class SpringRabbitListener {
 //        System.out.println("消费者2接收topic.queue2消息：【" + msg + "】");
 //    }
 
-    @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "fanout.queue1"),
-            exchange = @Exchange(name = "hmall.fanout", type = ExchangeTypes.FANOUT)
-    ))
-    public void listenerDirectQueue1(String msg) {
-        System.out.println("消费者1接收到Direct消息：【" + msg + "】");
-    }
-
-    @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(name = "fanout.queue2"),
-            exchange = @Exchange(name = "hmall.fanout", type = ExchangeTypes.FANOUT)
-    ))
-    public void listenerDirectQueue2(String msg) {
-        System.out.println("消费者2接收到Direct消息：【" + msg + "】");
-    }
+//    @RabbitListener(bindings = @QueueBinding(
+//            value = @Queue(name = "fanout.queue1"),
+//            exchange = @Exchange(name = "hmall.fanout", type = ExchangeTypes.FANOUT)
+//    ))
+//    public void listenerDirectQueue1(String msg) {
+//        System.out.println("消费者1接收到Direct消息：【" + msg + "】");
+//    }
+//
+//    @RabbitListener(bindings = @QueueBinding(
+//            value = @Queue(name = "fanout.queue2"),
+//            exchange = @Exchange(name = "hmall.fanout", type = ExchangeTypes.FANOUT)
+//    ))
+//    public void listenerDirectQueue2(String msg) {
+//        System.out.println("消费者2接收到Direct消息：【" + msg + "】");
+//    }
 
 
 //

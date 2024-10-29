@@ -135,5 +135,16 @@ public class SpringAmqpTest {
 
     }
 
+    @Test
+    public void testRetry() throws InterruptedException {
+        // 队列名称
+        String exchangeName = "error.direct";
+        String routingKey = "error";
+        // 消息
+        String msg = "hello 大家好: " + routingKey;
+        // 发送消息，参数依次为：交换机名称，RoutingKey，消息
+        rabbitTemplate.convertAndSend(exchangeName,routingKey, msg);
+    }
+
 
 }
