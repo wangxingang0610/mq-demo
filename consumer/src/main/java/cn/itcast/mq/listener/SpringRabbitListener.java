@@ -1,6 +1,8 @@
 package cn.itcast.mq.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Slf4j
 @Component
 public class SpringRabbitListener {
 
@@ -17,11 +20,11 @@ public class SpringRabbitListener {
      * @param msg
      * @throws Exception
      */
-    @RabbitListener(queues = "simple.queue")
-    public void listenerSimpleQueueMessage(String msg) throws Exception{
-        System.out.println("spring 消费者接收到消息 ：【" + msg + "】");
-        throw new RuntimeException("模拟异常");
-    }
+//    @RabbitListener(queues = "simple.queue")
+//    public void listenerSimpleQueueMessage(String msg) throws Exception{
+//        System.out.println("spring 消费者接收到消息 ：【" + msg + "】");
+//        throw new RuntimeException("模拟异常");
+//    }
 //    /*----------------------------------------------------------------------------------------*/
 //    /**
 //     * 工作队列（消费者）
@@ -143,5 +146,17 @@ public class SpringRabbitListener {
 //    public void listenObjectQueue(Map<String, Object> msg) {
 //        System.out.println("收到消息：【" + msg + "】");
 //    }
+
+    /**
+     * 业务幂等性
+     * @param msg
+     * @throws Exception
+     */
+    @RabbitListener(queues = "simple.queue")
+    public void listenerSimpleQueueMessage(Message message) throws Exception{
+        log.info("spring 消费者接收到消息 ：【" + message + "】");
+        String msg = new String(message.getBody());
+        log.info("spring 消费者接收到消息 ：【" + msg + "】");
+    }
 
 }
