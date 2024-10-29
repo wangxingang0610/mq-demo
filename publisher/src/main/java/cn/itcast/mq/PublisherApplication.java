@@ -12,4 +12,9 @@ public class PublisherApplication {
         SpringApplication.run(PublisherApplication.class);
     }
 
+    @Bean
+    public MessageConverter jsonMessageConverter(){
+        return new Jackson2JsonMessageConverter();
+    }
+
 }

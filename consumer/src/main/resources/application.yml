@@ -1,6 +1,8 @@
 logging:
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
+  level:
+    cn.itcast: debug
 spring:
   rabbitmq:
     host: 10.211.55.14 # 主机名
